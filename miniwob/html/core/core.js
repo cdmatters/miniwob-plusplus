@@ -1,6 +1,15 @@
 var SCALE_FACTOR = 1; 
 var core = {};
+// var scaleArea = function(scaleFactor) {
+//   var areaElement = document.getElementById('wrap');
+//   if (areaElement) {
+//     areaElement.style.transform = 'scale(' + scaleFactor + ')';
+//     areaElement.style.transformOrigin = 'top left';
+//   }
+// };
 
+// Example usage:
+// scaleArea(1.5); 
 // various common utilities
 
 // seedrandom.min.js -- https://github.com/davidbau/seedrandom
