@@ -1,3 +1,4 @@
+var SCALE_FACTOR = 1; 
 var core = {};
 
 // various common utilities
@@ -198,8 +199,8 @@ core.createDisplay = function(){
     // Click visualizer
     var canvas = document.createElement('canvas');
     canvas.setAttribute('id','click-canvas');
-    canvas.setAttribute('width',160);
-    canvas.setAttribute('height',210);
+    canvas.setAttribute('width',160*SCALE_FACTOR);
+    canvas.setAttribute('height',210*SCALE_FACTOR);
     document.body.appendChild(canvas);
     document.body.addEventListener('click', core.canvasDrawClick);
     // Reward display
@@ -525,7 +526,7 @@ core.prepareCanvas = function () {
   var ctx = core.clickTrackCtx;
   ctx.globalCompositeOperation = "screen";
   ctx.fillStyle = "hsl(0, 0, 80)";
-  ctx.fillRect(0,0,160,210);
+  ctx.fillRect(0,0,160*SCALE_FACTOR,210*SCALE_FACTOR);
   ctx.globalCompositeOperation = "source-over";  // restore default comp
   return true;
 }
@@ -536,7 +537,7 @@ core.canvasDrawClick = function (event) {
   // Note that the element is clicked
   event.target.dataset.tampered = 'e' + WOB_EPISODE_ID;
   // Don't visualize elementClick or clicks outside the bound
-  if (!event.isTrusted || event.pageX > 160 || event.pageY > 210) return;
+  if (!event.isTrusted || event.pageX > 160*SCALE_FACTOR || event.pageY > 210*SCALE_FACTOR) return;
   // Draw!
   if (!core.prepareCanvas()) return;
   var ctx = core.clickTrackCtx;
@@ -549,6 +550,7 @@ core.canvasDrawClick = function (event) {
 core.canvasDrawElementClick = function (element) {
   if (!core.prepareCanvas()) return;
   var rect = element.getBoundingClientRect()
+  console.log(rect);
   var ctx = core.clickTrackCtx;
   ctx.fillStyle = "rgba(100, 100, 255, 0.8)";
   ctx.fillRect(rect.left, rect.top, rect.width, rect.height); 
@@ -559,7 +561,7 @@ core.canvasClear = function () {
     core.clickTrackCtx = document.getElementById('click-canvas').getContext('2d');
   var ctx = core.clickTrackCtx;
   ctx.fillStyle = "white";
-  ctx.fillRect(0,0,160,210);
+  ctx.fillRect(0,0,160*SCALE_FACTOR,210*SCALE_FACTOR);
 }
 
 // ################################
@@ -584,7 +586,7 @@ core.visualizeAttention = function (values) {
     core.attentionCtx = canvas.getContext('2d');
   }
   var ctx = core.attentionCtx;
-  ctx.clearRect(0,0,160,210);
+  ctx.clearRect(0,0,160*SCALE_FACTOR,210*SCALE_FACTOR);
   values.forEach(function (row, i) {
     var y = ROW_TO_Y[i];
     row.forEach(function (cell, j) {
