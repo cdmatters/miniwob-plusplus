@@ -1,13 +1,14 @@
 body {
-  transform: scale(4, 4);  
+  /*transform: scale(4, 4);  
   transform-origin: top left;  
-  /* width: calc(100% / 1.5);  
+   width: calc(100% / 1.5);  
   height: calc(100%/1.5); */
   background-color: #555;
   font-family: Arial;
   font-size: 14px;
   margin: 0;
   padding: 0;
+  zoom: 4;
 }
 
 #wrap {
